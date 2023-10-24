@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://iuols8w0k7sq"]
+
+[ext_resource type="PackedScene" uid="uid://dolwdkj63cma4" path="res://models/elebitguy.glb" id="1_8fjnb"]
+[ext_resource type="Material" uid="uid://bdv7c1ck5xitg" path="res://models/materials/bittybops.tres" id="2_x1y3p"]
+
+[node name="elebitguy" instance=ExtResource("1_8fjnb")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(2.7093e-09, -0.818157, 0.346038)
+bones/0/rotation = Quaternion(0.238916, -1.7037e-24, -5.305e-17, 0.97104)
+bones/1/rotation = Quaternion(0.0438987, 2.04407e-24, -9.74747e-18, 0.999036)
+bones/2/rotation = Quaternion(-0.214186, 4.23417e-25, 4.75589e-17, 0.976793)
+bones/3/rotation = Quaternion(-0.35367, -0.0778733, -0.200439, 0.910317)
+bones/4/rotation = Quaternion(-0.35367, 0.0778733, 0.200439, 0.910317)
+bones/12/position = Vector3(-0.739616, 0.433454, -0.257983)
+bones/12/rotation = Quaternion(0.0873848, -0.327278, 0.909034, 0.242716)
+bones/13/rotation = Quaternion(-0.25593, -0.108031, 0.117304, 0.953451)
+bones/14/position = Vector3(0.739616, 0.423045, -0.248844)
+bones/14/rotation = Quaternion(-0.0893746, -0.33473, 0.906316, -0.24199)
+bones/15/rotation = Quaternion(-0.25593, 0.108031, -0.117304, 0.953451)
+
+[node name="eyes" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.199174, 0.000282201, -0.00204131, -0.00204096, -0.000246841, -0.199174, -0.000284716, 0.199184, -0.000243936, -0.307184, 0.0985349, 1.51282)
+bone_idx = 7
+
+[node name="mouth" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.438736, -2.28515e-09, 2.4389e-10, -1.09415e-10, -0.0410918, -0.294561, 3.38837e-09, 0.294561, -0.0410918, -0.0114187, -0.376645, 1.4532)
+bone_idx = 8
+
+[node name="nose" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.207866, -1.08267e-09, 1.15552e-10, -5.1839e-11, -0.0194687, -0.139559, 1.60536e-09, 0.139559, -0.0194687, -0.0114187, -0.0618042, 1.49712)
+bone_idx = 9
+
+[node name="body" parent="Armature/Skeleton3D" index="3"]
+material_override = ExtResource("2_x1y3p")

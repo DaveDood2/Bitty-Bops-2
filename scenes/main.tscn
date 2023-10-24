@@ -1,0 +1,161 @@
+[gd_scene load_steps=21 format=3 uid="uid://dxvvlck8lej3f"]
+
+[ext_resource type="Environment" uid="uid://jvmpkdwaeaq" path="res://scenes/main-environment.tres" id="1_q8fpv"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_ts4aj"]
+[ext_resource type="PackedScene" uid="uid://dl2ed4gkybggf" path="res://objects/player.tscn" id="2_elriq"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="3_s8mkj"]
+[ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://fonts/lilita_one_regular.ttf" id="3_w27de"]
+[ext_resource type="PackedScene" uid="uid://dpm3l05d7fu35" path="res://objects/platform.tscn" id="5_3s40e"]
+[ext_resource type="PackedScene" uid="uid://r7rt7pth4u7o" path="res://objects/wall_low.tscn" id="5_6vel1"]
+[ext_resource type="PackedScene" uid="uid://c71evdjblk5wp" path="res://objects/wall_high.tscn" id="7_cabne"]
+[ext_resource type="PackedScene" uid="uid://bvx5cvigosg0s" path="res://objects/platform_large_grass.tscn" id="7_wggef"]
+[ext_resource type="Script" path="res://scenes/draggableObject.gd" id="9_2xgj7"]
+[ext_resource type="Texture2D" uid="uid://dorcvghavxpku" path="res://sprites/elebits.jpg" id="10_dcs3i"]
+[ext_resource type="PackedScene" uid="uid://iuols8w0k7sq" path="res://scenes/elebitguy.tscn" id="11_e5tol"]
+[ext_resource type="PackedScene" uid="uid://3deh44juv2bg" path="res://bitty_bop.tscn" id="13_v7f8d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fpmwk"]
+font = ExtResource("3_w27de")
+font_size = 36
+outline_size = 12
+outline_color = Color(0, 0, 0, 0.470588)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ijlfq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6pw2"]
+albedo_texture = ExtResource("10_dcs3i")
+uv1_scale = Vector3(2.015, 2.02, 0.69)
+uv1_offset = Vector3(0.37, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ux6i4"]
+material = SubResource("StandardMaterial3D_l6pw2")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kiiug"]
+radius = 0.984944
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1xnxu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_iqisu"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ts4aj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_q8fpv")
+
+[node name="Player" parent="." node_paths=PackedStringArray("crosshair") instance=ExtResource("2_elriq")]
+crosshair = NodePath("../HUD/Crosshair")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.75
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_s8mkj")
+
+[node name="Crosshair" type="TextureRect" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(64, 64)
+
+[node name="Health" type="Label" parent="HUD"]
+offset_left = 48.0
+offset_top = 627.0
+offset_right = 138.0
+offset_bottom = 672.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "100%"
+label_settings = SubResource("LabelSettings_fpmwk")
+vertical_alignment = 2
+
+[node name="Level" type="Node" parent="."]
+
+[node name="wall-low" parent="Level" instance=ExtResource("5_6vel1")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1.92088, 1.05, -6.90166)
+
+[node name="wall-low3" parent="Level" instance=ExtResource("5_6vel1")]
+transform = Transform3D(-1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, -1, 6.07912, 1.05, 6.59834)
+
+[node name="platform" parent="Level" instance=ExtResource("5_3s40e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 6.5)
+
+[node name="platform2" parent="Level" instance=ExtResource("5_3s40e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 2.5, -2.5)
+
+[node name="platform3" parent="Level" instance=ExtResource("5_3s40e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, -3.5)
+
+[node name="platform4" parent="Level" instance=ExtResource("5_3s40e")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 7, 1, -2)
+
+[node name="wall-high" parent="Level" instance=ExtResource("7_cabne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.5, 4)
+
+[node name="wall-high2" parent="Level" instance=ExtResource("7_cabne")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 11.5, 3, -5.5)
+
+[node name="platform-large-grass" parent="Level" instance=ExtResource("7_wggef")]
+transform = Transform3D(6.21, 0, 0, 0, 1, 0, 0, 0, 8.135, 0, -0.5, 0)
+
+[node name="platform-large-grass2" parent="Level" instance=ExtResource("7_wggef")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2, 0.5, -6)
+
+[node name="platform-large-grass3" parent="Level" instance=ExtResource("7_wggef")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -6, 1, 2.5)
+
+[node name="platform-large-grass5" parent="Level" instance=ExtResource("7_wggef")]
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 12, 2.5, -5)
+
+[node name="platform-large-grass4" parent="Level" instance=ExtResource("7_wggef")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 5, 0.5, 5.5)
+
+[node name="the elebits cube" type="RigidBody3D" parent="Level" groups=["draggable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.12082, 2.18324, 2.00035)
+collision_layer = 19
+script = ExtResource("9_2xgj7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/the elebits cube"]
+shape = SubResource("BoxShape3D_ijlfq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/the elebits cube"]
+mesh = SubResource("BoxMesh_ux6i4")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Decoration" type="Node" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["draggable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.41725, -0.20928, -0.293561)
+collision_layer = 17
+
+[node name="elebitguy" parent="RigidBody3D" instance=ExtResource("11_e5tol")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.746349, 0)
+shape = SubResource("SphereShape3D_kiiug")
+
+[node name="simpleCube" type="RigidBody3D" parent="." groups=["draggable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.946629, 2.18324, 2.00035)
+collision_layer = 17
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="simpleCube"]
+shape = SubResource("BoxShape3D_1xnxu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="simpleCube"]
+mesh = SubResource("BoxMesh_iqisu")
+
+[node name="BittyBop" parent="." instance=ExtResource("13_v7f8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99986, 4.76837e-07, -5.35493)
+
+[connection signal="health_updated" from="Player" to="HUD" method="_on_health_updated"]
